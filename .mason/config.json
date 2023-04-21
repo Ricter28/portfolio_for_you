@@ -1,0 +1,88 @@
+{
+  "states": [
+    {
+      "name": "init",
+      "variables": []
+    },
+    {
+      "name": "loading",
+      "variables": []
+    },
+    {
+      "name": "created",
+      "variables": []
+    },
+    {
+      "name": "updated",
+      "variables": []
+    },
+    {
+      "name": "deleted",
+      "variables": []
+    },
+    {
+      "name": "loaded",
+      "variables": [
+        {
+          "name": "results",
+          "type": "List<String>"
+        }
+      ]
+    },
+    {
+      "name": "error",
+      "variables": [
+        {
+          "name": "errorMessage",
+          "type": "String"
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "init",
+      "variables": []
+    },
+    {
+      "name": "search",
+      "variables": [
+        {
+          "name": "keyWork",
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "create",
+      "variables": [
+        {
+          "name": "data",
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "update",
+      "variables": [
+        {
+          "name": "id",
+          "type": "String"
+        },
+        {
+          "name": "data",
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "delete",
+      "variables": [
+        {
+          "name": "id",
+          "type": "String"
+        }
+      ]
+    }
+  ]
+}

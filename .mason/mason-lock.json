@@ -1,0 +1,9 @@
+{
+  "bricks": {
+    "bloc_template": {
+      "path": ".mason/bricks/bloc_template"
+      
+    },
+    "hello": "0.1.0+1"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "texts": {
+    "notification": "Notification",
+    "success": "Success",
+    "email_address": "Email Address",
+    "password": "Password",
+    "ops": "Oops!",
+    "settings": "Settings",
+    "not_now": "Not Now",
+    "please_wait": "Please wait!"
+  },
+  "button": {
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  },
+  "root": {
+    "home": "Home",
+    "profile": "Profile",
+    "management": "Management"
+  },
+  "login": {
+    "welcome_back": "Nice to have you back!",
+    "sign_in": "Sign in"
+  },
+  "validator": {
+    "email_required": "Please enter your email",
+    "password_required": "Please enter your password"
+  },
+  "appbar": {
+    "full_company_name": "Company name",
+    "company_name": "Name",
+    "sologan": "Your sologan, or description",
+    "activity": "Activity",
+    "messageer": "Messageer",
+    "search": "Search...",
+    "done": "Done"
+  },
+  "message": {
+    "default_error": "An error has occurred",
+    "auth_error": "The user account is incorrect."
+  },
+  "permission": {
+    "camera_deny": "To use camera, please give App access to your device camera in your phone’s privacy settings.",
+    "photo_deny": "To use photos, please give App access to your device library in your phone’s privacy settings.",
+    "use_camera": "Use camera",
+    "choose_library": "Choose from library"
+  }
+}
