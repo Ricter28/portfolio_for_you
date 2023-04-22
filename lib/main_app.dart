@@ -15,11 +15,13 @@ import 'package:flutter_template/common/theme/app_theme.dart';
 import 'package:flutter_template/router/app_router.dart';
 import 'package:flutter_template/di/di.dart';
 import 'package:flutter_template/flavors.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 Future<void> mainApp(Flavor flavor) async {
   AppFlavor.appFlavor = flavor;
   WidgetsFlutterBinding.ensureInitialized();
   LocalDatabase().initializeDatabase();
+  tz.initializeTimeZones();
   await initializeApp();
   runApp(
     EasyLocalization(
@@ -52,7 +54,7 @@ class MyApp extends StatelessWidget {
               getIt<AppRouter>().replaceAll([const OnboardingRoute()]);
             }
             if (state is UnauthenticatedState) {
-              getIt<AppRouter>().replaceAll([LoginRoute()]);
+              getIt<AppRouter>().replaceAll([const IntroFacebookRoute()]);
             }
           },
           child: MaterialApp.router(

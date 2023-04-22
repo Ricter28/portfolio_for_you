@@ -2,11 +2,16 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_template/common/constants/enum/app_index.enum.dart';
+import 'package:flutter_template/common/helpers/size_config.dart';
 import 'package:flutter_template/common/theme/app_color.dart';
 import 'package:flutter_template/common/theme/app_size.dart';
+import 'package:flutter_template/common/theme/text_styles.dart';
+import 'package:flutter_template/common/widgets/app_rounded_button.widget.dart';
 import 'package:flutter_template/common/widgets/card_data.widget.dart';
+import 'package:flutter_template/common/widgets/image_view.widget.dart';
 import 'package:flutter_template/common/widgets/loading_dot.widget.dart';
 import 'package:flutter_template/di/di.dart';
+import 'package:flutter_template/generated/assets.gen.dart';
 import 'package:flutter_template/modules/presentation/home/bloc/home_bloc.dart';
 //
 import 'package:flutter_template/modules/presentation/home/slive_appbar.view.dart';
@@ -86,6 +91,45 @@ class _HomeViewState extends State<HomeView> {
   BlocBuilder<HomeBloc, HomeState> _buildListCard() {
     return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
       if (state is LoadedHomeState) {
+        if (state.cards.isEmpty) {
+          return SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return Column(
+                  children: [
+                    ImageViewWidget(
+                      Assets.images.emtyData.path,
+                      width: SizeConfig.screenWidth * 0.8,
+                      height: 350,
+                    ),
+                    const Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: AppSize.kSpacing20),
+                      child: Text(
+                        "Looks like you don't have any data yet, let's start with your first product👇",
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(20),
+                      child: AppRoundedButton(
+                        onPressed: () {
+                          context.router.pushNamed(Routes.createCard);
+                        },
+                        child: Text(
+                          'Create your first card',
+                          style: AppStyles.body1
+                              .copyWith(color: AppColors.kBgDialog),
+                        ),
+                      ),
+                    )
+                  ],
+                );
+              },
+              childCount: 1,
+            ),
+          );
+        }
         return SliverList(
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {

@@ -83,11 +83,9 @@ class LocalDatabase {
   Future<void> insertCard(CardModel cardModel) async {
     try {
       var db = await database;
-      print(cardModel.toJson());
       await db.insert(tableCard, cardModel.toJson());
       debugPrint('Insert card.');
     } catch (e) {
-      print(e);
       debugPrint('Error on insert card.');
     }
   }
@@ -99,7 +97,6 @@ class LocalDatabase {
       await db.insert(tableItem, itemModel.toJson());
       debugPrint('Insert item.');
     } catch (e) {
-      print(e);
       debugPrint('Error on insert item.');
     }
   }
@@ -135,7 +132,7 @@ class LocalDatabase {
       }
       items.sort((a, b) => a.index!.compareTo(b.index!));
       debugPrint('Get items.');
-    } catch (_) {
+    } catch (e) {
       debugPrint('Error on get items.');
     }
     return items;

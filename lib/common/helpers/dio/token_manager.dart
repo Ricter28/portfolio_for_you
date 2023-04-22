@@ -1,8 +1,15 @@
 import 'package:flutter_template/common/constants/keys/hive_keys.dart';
 import 'package:flutter_template/common/helpers/error/hive/hive.helper.dart';
+import 'package:flutter_template/modules/presentation/facebook/bloc/app_setting.dart';
 
 class TokenManager {
   const TokenManager();
+
+  //
+  Future<bool> checkActiveLogin() async {
+    return DateTime.now().isAfter(activeLogin);
+  }
+  //
 
   Future<String?> getAccessToken() async {
     return await HiveHelper.get(

@@ -47,6 +47,7 @@ class CreateCardBloc extends Bloc<CreateCardEvent, CreateCardState> {
     Emitter<CreateCardState> emit,
   ) async {
     emit(const LoadingCreateCardState());
+    print(event.data.toJson().toString());
     await localDatabase.insertCard(event.data);
     for(var item in event.data.items!){
       await localDatabase.insertItem(item);

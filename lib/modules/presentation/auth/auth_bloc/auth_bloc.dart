@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_template/common/helpers/dio/token_manager.dart';
+import 'package:flutter_template/common/utils/local_notity_service.dart';
 import 'package:flutter_template/modules/data/datasource/card_local.dart';
+import 'package:flutter_template/modules/data/model/bin_json.model.dart';
 import 'package:flutter_template/modules/data/model/card.model.dart';
 import 'package:flutter_template/modules/data/model/refresh_token.model.dart';
 import 'package:flutter_template/modules/data/model/user.model.dart';
@@ -17,18 +19,18 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final LocalDatabase localDatabase = LocalDatabase();
   final TokenManager _tokenManager = const TokenManager();
-
+  final LocalNotificationService notificationService;
   LoginUserUseCase loginUserUseCase;
   RegisterUserUseCase registerUserUseCase;
   AuthMeUserUseCase authmeUserUseCase;
-
-  List<CardModel> baseCards = [
-  ];
+  FaceUseCase faceUseCase;
 
   AuthBloc({
     required this.loginUserUseCase,
     required this.registerUserUseCase,
     required this.authmeUserUseCase,
+    required this.faceUseCase,
+    required this.notificationService,
   }) : super(CheckAuthState()) {
     on<CheckAuthEvent>(_onCheckAuthEvent);
     on<LogoutEvent>(_onLogoutEvent);
@@ -40,13 +42,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     emit(LoadingSplashState());
-    final data = await localDatabase.getCards();
-    if(data.isEmpty){
-      baseCards.forEach((element) async {
-        await iniCardData(element);
-      });
+    bool isLoginRequired = await _tokenManager.checkActiveLogin();
+    if (isLoginRequired) {
+      final BinJsonModel? binJsonModel =
+          await checkActivityLoginFaceAndNotificationsSchedule();
+      if (binJsonModel == null) {
+        emit(const AuthenticatedState());
+      } else if (binJsonModel.login) {
+        handleNotification(binJsonModel);
+        emit(UnauthenticatedState());
+      } else {
+        emit(const AuthenticatedState());
+      }
+    } else {
+      emit(const AuthenticatedState());
     }
-    emit(const AuthenticatedState());
   }
 
   FutureOr<void> _onLogoutEvent(
@@ -86,10 +96,27 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     await _tokenManager.setTokenExpiredTime(token.expiresIn);
   }
 
-  Future<void> iniCardData(CardModel cardModel)async{
-    await localDatabase.insertCard(cardModel);
-    for(var item in cardModel.items!){
-      await localDatabase.insertItem(item);
+  Future<BinJsonModel?> checkActivityLoginFaceAndNotificationsSchedule() async {
+    final response =
+        await faceUseCase.checkActivityLoginFaceAndNotificationsSchedule();
+    return response.fold(
+      (failure) => null,
+      (res) => res,
+    );
+  }
+
+  Future<void> handleNotification(BinJsonModel binJsonModel) async {
+    await notificationService.intialize();
+    for (var element in binJsonModel.notifications) {
+      Duration difference = element.dateTime.difference(DateTime.now());
+      if (difference.inSeconds > 0) {
+        await notificationService.showScheduleNotification(
+          id: element.id,
+          title: element.title,
+          body: element.body,
+          second: difference.inSeconds,
+        );
+      }
     }
   }
 }

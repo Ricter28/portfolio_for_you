@@ -193,6 +193,12 @@ class $AssetsBioLinkGen {
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/f.png
+  AssetGenImage get f => const AssetGenImage('assets/icons/f.png');
+
+  /// File path: assets/icons/fc.png
+  AssetGenImage get fc => const AssetGenImage('assets/icons/fc.png');
+
   /// File path: assets/icons/ic_add_attachment.svg
   SvgGenImage get icAddAttachment =>
       const SvgGenImage('assets/icons/ic_add_attachment.svg');
@@ -302,8 +308,13 @@ class $AssetsIconsGen {
 
   $AssetsIconsLauncherGen get launcher => const $AssetsIconsLauncherGen();
 
+  /// File path: assets/icons/logo.png
+  AssetGenImage get logo => const AssetGenImage('assets/icons/logo.png');
+
   /// List of all assets
-  List<SvgGenImage> get values => [
+  List<dynamic> get values => [
+        f,
+        fc,
         icAddAttachment,
         icAddCalender,
         icAddMember,
@@ -334,12 +345,17 @@ class $AssetsIconsGen {
         icSendMessage,
         icTick,
         icUnMute,
-        icUser
+        icUser,
+        logo
       ];
 }
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
+
+  /// File path: assets/images/emty_data.gif
+  AssetGenImage get emtyData =>
+      const AssetGenImage('assets/images/emty_data.gif');
 
   /// File path: assets/images/img_default.png
   AssetGenImage get imgDefault =>
@@ -359,7 +375,7 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values =>
-      [imgDefault, onboard01, onboard02, onboard03];
+      [emtyData, imgDefault, onboard01, onboard02, onboard03];
 }
 
 class $AssetsLocalesGen {

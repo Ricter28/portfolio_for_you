@@ -53,6 +53,18 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ImageView(),
       );
     },
+    IntroFacebookRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const IntroFacebookView(),
+      );
+    },
+    FacebookRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const FacebookView(),
+      );
+    },
     ProfileRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -166,6 +178,34 @@ class ImageRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ImageRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [IntroFacebookView]
+class IntroFacebookRoute extends PageRouteInfo<void> {
+  const IntroFacebookRoute({List<PageRouteInfo>? children})
+      : super(
+          IntroFacebookRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'IntroFacebookRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [FacebookView]
+class FacebookRoute extends PageRouteInfo<void> {
+  const FacebookRoute({List<PageRouteInfo>? children})
+      : super(
+          FacebookRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'FacebookRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
