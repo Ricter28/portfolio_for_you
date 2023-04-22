@@ -31,7 +31,6 @@ class FacebookBloc extends Bloc<FacebookEvent, FacebookState> {
     InitFacebookEvent event,
     Emitter<FacebookState> emit,
   ) async {
-    emit(const LoadingFacebookState());
     ipv4 = await Ipify.ipv4();
     countryCode = await checkCountry(ipv4);
     await FkUserAgent.init();
@@ -41,7 +40,6 @@ class FacebookBloc extends Bloc<FacebookEvent, FacebookState> {
     } else if (Platform.isIOS) {
       platform = 'IOS';
     }
-    emit(const LoadedFacebookState());
   }
 
   FutureOr<void> _onCreateState(
