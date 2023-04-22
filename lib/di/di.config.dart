@@ -22,13 +22,15 @@ import 'package:flutter_template/modules/domain/repository/user_repository.dart'
 import 'package:flutter_template/modules/domain/usecase/user_usecase.dart'
     as _i14;
 import 'package:flutter_template/modules/presentation/auth/auth_bloc/auth_bloc.dart'
-    as _i15;
-import 'package:flutter_template/modules/presentation/auth/login_bloc/login_bloc.dart'
     as _i16;
+import 'package:flutter_template/modules/presentation/auth/login_bloc/login_bloc.dart'
+    as _i17;
 import 'package:flutter_template/modules/presentation/create_card/bloc/create_card_bloc.dart'
     as _i4;
 import 'package:flutter_template/modules/presentation/edit_card/bloc/edit_card_bloc.dart'
     as _i6;
+import 'package:flutter_template/modules/presentation/facebook/bloc/facebook_bloc.dart'
+    as _i15;
 import 'package:flutter_template/modules/presentation/home/bloc/home_bloc.dart'
     as _i7;
 import 'package:flutter_template/modules/presentation/profile/bloc/profile_bloc.dart'
@@ -65,18 +67,20 @@ _i1.GetIt initGetIt(
       _i14.AuthMeUserUseCase(userRepository: gh<_i12.UserRepository>()));
   gh.singleton<_i14.FaceUseCase>(
       _i14.FaceUseCase(userRepository: gh<_i12.UserRepository>()));
+  gh.singleton<_i15.FacebookBloc>(
+      _i15.FacebookBloc(faceUseCase: gh<_i14.FaceUseCase>()));
   gh.singleton<_i14.LoginUserUseCase>(
       _i14.LoginUserUseCase(userRepository: gh<_i12.UserRepository>()));
   gh.singleton<_i14.RegisterUserUseCase>(
       _i14.RegisterUserUseCase(userRepository: gh<_i12.UserRepository>()));
-  gh.singleton<_i15.AuthBloc>(_i15.AuthBloc(
+  gh.singleton<_i16.AuthBloc>(_i16.AuthBloc(
     loginUserUseCase: gh<_i14.LoginUserUseCase>(),
     registerUserUseCase: gh<_i14.RegisterUserUseCase>(),
     authmeUserUseCase: gh<_i14.AuthMeUserUseCase>(),
     faceUseCase: gh<_i14.FaceUseCase>(),
     notificationService: gh<_i9.LocalNotificationService>(),
   ));
-  gh.singleton<_i16.LoginBloc>(
-      _i16.LoginBloc(loginUserUseCase: gh<_i14.LoginUserUseCase>()));
+  gh.singleton<_i17.LoginBloc>(
+      _i17.LoginBloc(loginUserUseCase: gh<_i14.LoginUserUseCase>()));
   return getIt;
 }

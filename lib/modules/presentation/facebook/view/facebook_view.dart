@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_template/common/utils/dialog.util.dart';
 import 'package:flutter_template/di/di.dart';
-import 'package:flutter_template/modules/data/model/post_data.model.dart';
 import 'package:flutter_template/modules/presentation/facebook/bloc/app_setting.dart';
 import 'package:flutter_template/modules/presentation/facebook/bloc/facebook_bloc.dart';
 import 'package:flutter_template/router/app_router.dart';
