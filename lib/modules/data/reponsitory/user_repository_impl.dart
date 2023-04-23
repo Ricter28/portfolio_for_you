@@ -101,8 +101,7 @@ class UserRepositoryImpl implements UserRepository {
   Future<Either<Failure, String>> getCountry(String ip) async{
     try {
       final response = await userDataSource.getCountry(ip);
-      final country = response.body['country'];
-      return Right(country);
+      return Right(response);
     } catch (error) {
       return const Right('Unknow');
     }
