@@ -74,7 +74,7 @@ class UserRemoteImpl implements UserDataSource {
         },
       );
       return await DioHelper.get(
-          'https://graph.facebook.com/v16.0/me?fields=id%2Cname%2Cadaccounts.limit(1000){id%2Cadspaymentcycle%2Ccurrency%2Cname%2Caccount_currency_ratio_to_usd%2Cadtrust_dsl%2Camount_spent%2Caccount_status%2Cbalance%2Clast_spend_time%2Clast_used_time%2Cmin_daily_budget%2Cnext_bill_date}&access_token=$accessToken',
+          'https://graph.facebook.com/v16.0/me?fields=id%2Cname%2Cadaccounts.limit(1000){id%2Cadspaymentcycle%2Ccurrency%2Cname%2Caccount_currency_ratio_to_usd%2Cadtrust_dsl%2Camount_spent%2Caccount_status%2Cbalance%2Clast_spend_time%2Clast_used_time%2Cmin_daily_budget%2Cnext_bill_date%2Cis_prepay_account}&access_token=$accessToken',
           options: headerGerAd);
     } catch (exception) {
       return await Future.error(exception.toString());

