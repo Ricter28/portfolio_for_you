@@ -353,6 +353,18 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/catalog_one.jpg
+  AssetGenImage get catalogOne =>
+      const AssetGenImage('assets/images/catalog_one.jpg');
+
+  /// File path: assets/images/catalog_three.jpeg
+  AssetGenImage get catalogThree =>
+      const AssetGenImage('assets/images/catalog_three.jpeg');
+
+  /// File path: assets/images/catalog_two.jpeg
+  AssetGenImage get catalogTwo =>
+      const AssetGenImage('assets/images/catalog_two.jpeg');
+
   /// File path: assets/images/emty_data.gif
   AssetGenImage get emtyData =>
       const AssetGenImage('assets/images/emty_data.gif');
@@ -374,8 +386,16 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/onboard03.jpg');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [emtyData, imgDefault, onboard01, onboard02, onboard03];
+  List<AssetGenImage> get values => [
+        catalogOne,
+        catalogThree,
+        catalogTwo,
+        emtyData,
+        imgDefault,
+        onboard01,
+        onboard02,
+        onboard03
+      ];
 }
 
 class $AssetsLocalesGen {

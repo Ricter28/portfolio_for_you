@@ -6,10 +6,8 @@ import 'package:flutter_template/common/theme/app_size.dart';
 import 'package:flutter_template/common/theme/text_styles.dart';
 import 'package:flutter_template/common/widgets/app_rounded_button.widget.dart';
 import 'package:flutter_template/common/widgets/app_text_form_field.widget.dart';
-import 'package:flutter_template/common/widgets/dropdown_widet.dart';
 import 'package:flutter_template/common/widgets/image_view.widget.dart';
 import 'package:flutter_template/common/widgets/loading_dot.widget.dart';
-import 'package:flutter_template/di/di.dart';
 import 'package:flutter_template/modules/data/model/user.model.dart';
 import 'package:flutter_template/modules/presentation/profile/bloc/profile_bloc.dart';
 

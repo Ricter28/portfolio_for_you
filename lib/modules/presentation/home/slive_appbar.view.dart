@@ -42,7 +42,7 @@ class _SliveAppbarViewState extends State<SliveAppbarView>
 
   @override
   void initState() {
-    tabController = TabController(length: 2, vsync: this);
+    tabController = TabController(length: 3, vsync: this);
     searchController = TextEditingController();
     super.initState();
   }
@@ -115,6 +115,12 @@ class _SliveAppbarViewState extends State<SliveAppbarView>
 
   List<Widget> get _buildTabs {
     return <Widget>[
+      const Padding(
+        padding: EdgeInsets.only(right: AppSize.kSpacing20),
+        child: Tab(
+          text: 'Catalog and tips',
+        ),
+      ),
       const Padding(
         padding: EdgeInsets.only(right: AppSize.kSpacing20),
         child: Tab(

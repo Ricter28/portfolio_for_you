@@ -12,6 +12,7 @@ import 'package:flutter_template/common/widgets/image_view.widget.dart';
 import 'package:flutter_template/common/widgets/loading_dot.widget.dart';
 import 'package:flutter_template/di/di.dart';
 import 'package:flutter_template/generated/assets.gen.dart';
+import 'package:flutter_template/modules/presentation/catalog/view/catalog_view.dart';
 import 'package:flutter_template/modules/presentation/home/bloc/home_bloc.dart';
 //
 import 'package:flutter_template/modules/presentation/home/slive_appbar.view.dart';
@@ -27,7 +28,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   late HomeBloc homeBloc;
-  int tabIndex = HomeIndexEnum.activityTab;
+  int tabIndex = HomeIndexEnum.catalogTag;
   bool isShowSearch = false;
 
   @override
@@ -90,6 +91,9 @@ class _HomeViewState extends State<HomeView> {
 
   BlocBuilder<HomeBloc, HomeState> _buildListCard() {
     return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
+      if(tabIndex == HomeIndexEnum.catalogTag){
+        return CatalogView();
+      }
       if (state is LoadedHomeState) {
         if (state.cards.isEmpty) {
           return SliverList(

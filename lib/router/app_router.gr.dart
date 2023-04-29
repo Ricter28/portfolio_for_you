@@ -41,6 +41,14 @@ abstract class _$AppRouter extends RootStackRouter {
         child: LoginView(key: args.key),
       );
     },
+    CatalogRoute.name: (routeData) {
+      final args = routeData.argsAs<CatalogRouteArgs>(
+          orElse: () => const CatalogRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: CatalogView(key: args.key),
+      );
+    },
     CreateCardRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -151,6 +159,35 @@ class LoginRouteArgs {
   @override
   String toString() {
     return 'LoginRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [CatalogView]
+class CatalogRoute extends PageRouteInfo<CatalogRouteArgs> {
+  CatalogRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          CatalogRoute.name,
+          args: CatalogRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'CatalogRoute';
+
+  static const PageInfo<CatalogRouteArgs> page =
+      PageInfo<CatalogRouteArgs>(name);
+}
+
+class CatalogRouteArgs {
+  const CatalogRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'CatalogRouteArgs{key: $key}';
   }
 }
 

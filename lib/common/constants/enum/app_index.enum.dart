@@ -1,4 +1,5 @@
 abstract class HomeIndexEnum{
-  static int activityTab = 0;
-  static int messageTab = 1;
+  static int catalogTag = 0;
+  static int activityTab = 1;
+  static int messageTab = 2;
 }
