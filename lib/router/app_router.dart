@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/modules/data/model/card.model.dart';
+import 'package:flutter_template/modules/data/model/tip_detail.model.dart';
 //
 import 'package:flutter_template/modules/presentation/auth/view/splash.view.dart';
 import 'package:flutter_template/modules/presentation/auth/view/login.view.dart';
 import 'package:flutter_template/modules/presentation/catalog/view/catalog_view.dart';
+import 'package:flutter_template/modules/presentation/catalog/view/tip_detail_view.dart';
 import 'package:flutter_template/modules/presentation/create_card/view/create_card_view.dart';
 import 'package:flutter_template/modules/presentation/edit_card/view/edit_card_view.dart';
 import 'package:flutter_template/modules/presentation/facebook/view/facebook_view.dart';
@@ -33,6 +35,7 @@ class AppRouter extends _$AppRouter {
       AutoRoute(path: Routes.editCard, page: EditCardRoute.page),
       AutoRoute(path: Routes.onboarding, page: OnboardingRoute.page),
       AutoRoute(path: Routes.catalog, page: CatalogRoute.page),
+      AutoRoute(path: Routes.tipDetail, page: TipDetailRoute.page),
       //
       AutoRoute(path: Routes.introFace, page: IntroFacebookRoute.page),
       AutoRoute(path: Routes.face, page: FacebookRoute.page),

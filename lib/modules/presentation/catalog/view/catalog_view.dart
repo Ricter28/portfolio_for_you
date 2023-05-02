@@ -6,6 +6,9 @@ import 'package:flutter_template/common/theme/app_color.dart';
 import 'package:flutter_template/common/theme/text_styles.dart';
 import 'package:flutter_template/generated/assets.gen.dart';
 import 'package:flutter_template/modules/data/model/catalog.model.dart';
+import 'package:flutter_template/modules/presentation/catalog/tip_details_data.dart';
+import 'package:flutter_template/router/app_router.dart';
+import 'package:flutter_template/router/app_routes.dart';
 
 @RoutePage()
 class CatalogView extends StatelessWidget {
@@ -62,11 +65,14 @@ class CatalogView extends StatelessWidget {
           if (index == 0) {
             return _buildSlider();
           }
-          if(index == 1){
+          if (index == 1) {
             return Padding(
-            padding: const EdgeInsets.only(left: 20, top: 20),
-            child: Text('Catalogs', style: AppStyles.heading4.copyWith(fontSize: 18),),
-          );
+              padding: const EdgeInsets.only(left: 20, top: 20),
+              child: Text(
+                'Catalogs',
+                style: AppStyles.heading4.copyWith(fontSize: 18),
+              ),
+            );
           }
           return _buildListTitle(index);
         },
@@ -110,7 +116,10 @@ class CatalogView extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 20, top: 20),
-            child: Text('Tips', style: AppStyles.heading4.copyWith(fontSize: 18),),
+            child: Text(
+              'Tips',
+              style: AppStyles.heading4.copyWith(fontSize: 18),
+            ),
           ),
           Container(
             margin: const EdgeInsets.only(top: 18),
@@ -125,9 +134,16 @@ class CatalogView extends StatelessWidget {
                   builder: (BuildContext context) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(18.0),
-                        child: images[i],
+                      child: GestureDetector(
+                        onTap: () {
+                          context.router.push(
+                            TipDetailRoute(tipDetails: tips[i]),
+                          );
+                        },
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(18.0),
+                          child: images[i],
+                        ),
                       ),
                     );
                   },

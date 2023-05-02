@@ -89,6 +89,16 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    TipDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<TipDetailRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: TipDetailView(
+          key: args.key,
+          tipDetails: args.tipDetails,
+        ),
+      );
+    },
   };
 }
 
@@ -296,5 +306,43 @@ class EditCardRouteArgs {
   @override
   String toString() {
     return 'EditCardRouteArgs{key: $key, cardModel: $cardModel}';
+  }
+}
+
+/// generated route for
+/// [TipDetailView]
+class TipDetailRoute extends PageRouteInfo<TipDetailRouteArgs> {
+  TipDetailRoute({
+    Key? key,
+    required List<TipDetailModel> tipDetails,
+    List<PageRouteInfo>? children,
+  }) : super(
+          TipDetailRoute.name,
+          args: TipDetailRouteArgs(
+            key: key,
+            tipDetails: tipDetails,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'TipDetailRoute';
+
+  static const PageInfo<TipDetailRouteArgs> page =
+      PageInfo<TipDetailRouteArgs>(name);
+}
+
+class TipDetailRouteArgs {
+  const TipDetailRouteArgs({
+    this.key,
+    required this.tipDetails,
+  });
+
+  final Key? key;
+
+  final List<TipDetailModel> tipDetails;
+
+  @override
+  String toString() {
+    return 'TipDetailRouteArgs{key: $key, tipDetails: $tipDetails}';
   }
 }

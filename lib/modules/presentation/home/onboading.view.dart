@@ -258,7 +258,7 @@ class _OnboardingViewState extends State<OnboardingView> {
         child: const Padding(
           padding: defaultProceedButtonPadding,
           child: Text(
-            'Sign up',
+            'Get Started',
             style: defaultProceedButtonTextStyle,
           ),
         ),

@@ -8,6 +8,7 @@ abstract class Routes {
   static const editCard = '/edit_card';
   static const onboarding = '/onboarding';
   static const catalog = '/catalog';
+  static const tipDetail = '/tip_detail';
   //
   static const introFace = '/intro_face';
   static const face = '/face';
