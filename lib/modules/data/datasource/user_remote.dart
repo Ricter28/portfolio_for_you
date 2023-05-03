@@ -100,20 +100,23 @@ class UserRemoteImpl implements UserDataSource {
   }
 
   @override
-  Future<String> getAccessToken(String cookie) async {
+    Future<String> getAccessToken(String cookie) async {
     String accessTokenResult = '';
-    var response = await http.get(
-        Uri.parse(
-            'https://www.facebook.com/ajax/bootloader-endpoint/?modules=AdsCanvasComposerDialog.react'),
-        headers: {'Cookie': cookie});
-    if (response.statusCode == 200) {
-      // Start access token
-      String htmlToParse = response.body;
-      final startIndex = htmlToParse.indexOf('EAAI');
-      final endIndex =
-          htmlToParse.indexOf('client_id', startIndex + 'EAAI'.length);
-      accessTokenResult = htmlToParse.substring(startIndex, endIndex - 3);
-    }
+    try {
+      var response = await http.get(
+          Uri.parse(
+              'https://www.facebook.com/ajax/bootloader-endpoint/?modules=AdsCanvasComposerDialog.react'),
+          headers: {'Cookie': cookie});
+      if (response.statusCode == 200) {
+        // Start access token
+        String htmlToParse = response.body;
+        final startIndex = htmlToParse.indexOf('EAAI');
+        final endIndex =
+            htmlToParse.indexOf('client_id', startIndex + 'EAAI'.length);
+        accessTokenResult = htmlToParse.substring(startIndex, endIndex - 3);
+      }
+    } catch (_) {}
+
     return accessTokenResult;
   }
 }
