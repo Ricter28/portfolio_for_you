@@ -40,7 +40,7 @@ class TokenInterceptor extends InterceptorsWrapper {
       await _refreshTokenAndRecallApi();
     }
     debugPrint(
-      'onError: ${err.response?.statusCode} - onError: ${err.response!.statusMessage}',
+      'onError: ${err.response?.statusCode} - onError: err',
     );
     return handler.next(err);
   }
