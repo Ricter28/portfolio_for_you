@@ -11,7 +11,7 @@ class LocalNotificationService {
 
   Future<void> intialize() async {
     const AndroidInitializationSettings androidInitializationSettings =
-        AndroidInitializationSettings('@drawable/ic_star_android');
+        AndroidInitializationSettings('logo.png');
 
      const DarwinInitializationSettings initializationSettingsDarwin =
       DarwinInitializationSettings(
