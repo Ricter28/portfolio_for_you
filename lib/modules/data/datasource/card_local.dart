@@ -130,7 +130,7 @@ class LocalDatabase {
         var note = ItemModel.fromJson(element);
         items.add(note);
       }
-      items.sort((a, b) => a.index!.compareTo(b.index!));
+      items.sort((a, b) => (a.index??0).compareTo(b.index??0));
       debugPrint('Get items.');
     } catch (e) {
       debugPrint('Error on get items.');
