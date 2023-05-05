@@ -41,7 +41,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       List<ItemModel> i = [];
       if (event.keywork.isNotEmpty) {
         if (element.name!.contains(event.keywork)) {
-          print(element.name!.contains(event.keywork));
           for (var ie in items) {
             if (ie.cardId == element.id) {
               i.add(ie);
@@ -61,6 +60,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       }
     }
     final user = await getUserProfile();
+    print(result.length);
     emit(LoadedHomeState(user, result));
   }
 

@@ -1,2 +1,3 @@
-final DateTime activeLogin  = DateTime(2023, 5, 1);
-const String appName = 'The Name App Here';
+final DateTime activeLogin  = DateTime(2023, 5, 10);
+const String appName = 'Business Make Me';
+const String sologan = 'Creative, Customizable and Fast';

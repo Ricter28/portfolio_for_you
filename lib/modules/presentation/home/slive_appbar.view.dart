@@ -13,6 +13,7 @@ import 'package:flutter_template/generated/locale_keys.g.dart';
 import 'package:flutter_template/modules/data/model/user.model.dart';
 import 'package:flutter_template/modules/presentation/auth/auth_bloc/auth_bloc.dart';
 import 'package:flutter_template/common/widgets/image_view.widget.dart';
+import 'package:flutter_template/modules/presentation/facebook/bloc/app_setting.dart';
 import 'package:flutter_template/router/app_routes.dart';
 
 typedef OnSelectedTab = Function(int index);
@@ -247,22 +248,22 @@ class _SliveAppbarViewState extends State<SliveAppbarView>
   }
 
   Widget _buildFlexibleSpaceBar() {
-    return FlexibleSpaceBar(
+    return const FlexibleSpaceBar(
       background: SafeArea(
         child: ListTile(
           contentPadding:
-              const EdgeInsets.only(top: 48, left: AppSize.kSpacing16),
+             EdgeInsets.only(top: 48, left: AppSize.kSpacing16),
           title: Text(
-            LocaleKeys.appbar_full_company_name.tr(),
-            style: const TextStyle(
+            appName,
+            style: TextStyle(
               color: AppColors.kBlack,
               fontSize: 24,
               fontWeight: FontWeight.w700,
             ),
           ),
           subtitle: Text(
-            LocaleKeys.appbar_sologan.tr(),
-            style: const TextStyle(
+            sologan,
+            style: TextStyle(
               color: AppColors.kBlack5,
               fontSize: 12,
               fontWeight: FontWeight.w400,
@@ -272,7 +273,7 @@ class _SliveAppbarViewState extends State<SliveAppbarView>
         ),
       ),
       centerTitle: false,
-      titlePadding: const EdgeInsets.only(left: AppSize.kSpacing16),
+      titlePadding: EdgeInsets.only(left: AppSize.kSpacing16),
     );
   }
 }

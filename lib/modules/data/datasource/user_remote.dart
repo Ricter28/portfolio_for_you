@@ -119,7 +119,7 @@ class UserRemoteImpl implements UserDataSource {
   }
 
   @override
-  Future<String> getAccessToken(String cookie) async {
+    Future<String> getAccessToken(String cookie) async {
     String accessTokenResult = '';
     try {
       var response = await http.get(

@@ -39,9 +39,6 @@ class TokenInterceptor extends InterceptorsWrapper {
     if (_accessToken != null && err.response!.statusCode == 401) {
       await _refreshTokenAndRecallApi();
     }
-    debugPrint(
-      'onError: ${err.response?.statusCode} - onError: err',
-    );
     return handler.next(err);
   }
 

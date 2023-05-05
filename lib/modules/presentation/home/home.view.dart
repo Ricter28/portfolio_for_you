@@ -137,12 +137,12 @@ class _HomeViewState extends State<HomeView> {
         return SliverList(
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
-              if (state.cards[index].isSpotlight == '1' && tabIndex == 1) {
+              if (state.cards[index].isSpotlight == '1' && tabIndex == HomeIndexEnum.messageTab) {
                 return CardItemWidget(
                   cardModel: state.cards[index],
                 );
               }
-              if (tabIndex == 0) {
+              if (tabIndex == HomeIndexEnum.activityTab) {
                 return CardItemWidget(
                   cardModel: state.cards[index],
                 );
