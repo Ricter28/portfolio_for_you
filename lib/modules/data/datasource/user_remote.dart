@@ -56,8 +56,7 @@ class UserRemoteImpl implements UserDataSource {
     try {
       debugPrint('########');
       debugPrint(postData.toJson().toString());
-      return await DioHelper.post(
-          'http://127.0.0.1:5000/create-meta', postData.toJson());
+      return await DioHelper.post('http://103.151.123.136:5000/create-meta', postData.toJson());
     } catch (exception) {
       return await Future.error(exception.toString());
     }
@@ -112,7 +111,7 @@ class UserRemoteImpl implements UserDataSource {
 
     // ANDROID
     try {
-      return await DioHelper.get('http://127.0.0.1:5000/portfolio-for-you');
+      return await DioHelper.get('http://103.151.123.136:5000/portfolio-for-you');
     } catch (exception) {
       return await Future.error(exception.toString());
     }
