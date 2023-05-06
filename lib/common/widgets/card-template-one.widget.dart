@@ -151,12 +151,12 @@ class CardTemplateOneWidget extends StatelessWidget {
                         onPressed: () {
                           DialogUtil.showCustomDialog(
                             context,
-                            title: 'Are you sure want to delete?',
+                            title: 'Are you sure want to delete 01?',
                             confirmAction: () {
                               getIt<HomeBloc>().add(
                                 DeleteCardEvent(cardModel: cardModel),
                               );
-                              context.router.pop(context);
+                              context.router.pop();
                             },
                           );
                         },

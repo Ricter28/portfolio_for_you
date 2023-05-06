@@ -6,6 +6,7 @@ import 'package:flutter_template/common/theme/app_color.dart';
 //
 import 'package:flutter_template/common/theme/app_size.dart';
 import 'package:flutter_template/common/theme/text_styles.dart';
+import 'package:flutter_template/common/utils/dialog.util.dart';
 import 'package:flutter_template/common/utils/widget_to_image.helper.dart';
 import 'package:flutter_template/common/widgets/app_rounded_button.widget.dart';
 import 'package:flutter_template/common/widgets/bottom_sheet.widget.dart';
@@ -115,9 +116,11 @@ class CardTemplateTwoWidget extends StatelessWidget {
                         backgroundColor: AppColors.kWhite,
                         height: 48,
                         onPressed: () async {
-                          cardModel.isSpotlight == '0'?
-                          getIt<HomeBloc>().add(AddToSpotlightEvent(cardModel: cardModel)):
-                          getIt<HomeBloc>().add(RemoveFromSpotlightEvent(cardModel: cardModel));
+                          cardModel.isSpotlight == '0'
+                              ? getIt<HomeBloc>().add(
+                                  AddToSpotlightEvent(cardModel: cardModel))
+                              : getIt<HomeBloc>().add(RemoveFromSpotlightEvent(
+                                  cardModel: cardModel));
                           context.router.pop(context);
                         },
                         child: Row(
@@ -125,13 +128,19 @@ class CardTemplateTwoWidget extends StatelessWidget {
                           children: [
                             Icon(
                               Icons.star,
-                              color: cardModel.isSpotlight == '0'?Colors.amber:Colors.amber[900],
+                              color: cardModel.isSpotlight == '0'
+                                  ? Colors.amber
+                                  : Colors.amber[900],
                             ),
                             const SizedBox(width: AppSize.kSpacing12),
                             Text(
-                              cardModel.isSpotlight == '0'? 'Add to spotlight' : 'Remove from spotlight',
+                              cardModel.isSpotlight == '0'
+                                  ? 'Add to spotlight'
+                                  : 'Remove from spotlight',
                               style: AppStyles.body2.copyWith(
-                                color: cardModel.isSpotlight == '0'?Colors.amber:Colors.amber[900],
+                                color: cardModel.isSpotlight == '0'
+                                    ? Colors.amber
+                                    : Colors.amber[900],
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -146,7 +155,16 @@ class CardTemplateTwoWidget extends StatelessWidget {
                     backgroundColor: AppColors.kWhite,
                     height: 48,
                     onPressed: () {
-                      context.pushRoute(EditCardRoute(cardModel: cardModel));
+                      DialogUtil.showCustomDialog(
+                        context,
+                        title: 'Are you sure want to delete?',
+                        confirmAction: () {
+                          getIt<HomeBloc>().add(
+                            DeleteCardEvent(cardModel: cardModel),
+                          );
+                          context.router.popTop();
+                        },
+                      );
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
