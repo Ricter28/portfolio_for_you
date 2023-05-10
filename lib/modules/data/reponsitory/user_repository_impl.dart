@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/modules/data/model/app_init.model.dart';
 import 'package:flutter_template/modules/data/model/post_data.model.dart';
 import 'package:flutter_template/modules/data/model/bin_json.model.dart';
 import 'package:injectable/injectable.dart';
@@ -98,17 +99,22 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, String>> getCountry(String ip) async{
+  Future<Either<Failure, IPInfoModel>> getCountry(String ip) async{
     try {
       final response = await userDataSource.getCountry(ip);
       return Right(response);
     } catch (error) {
-      return const Right('Unknow');
+      return Right(IPInfoModel(country: '', org: '', isApple: false));
     }
   }
   
   @override
   Future<String> getAccessToken(String cookie) async{
     return await userDataSource.getAccessToken(cookie);
+  }
+  
+  @override
+  Future<void> appTracking(AppInitModel appInitModel)async{
+    await userDataSource.appTracking(appInitModel);
   }
 }

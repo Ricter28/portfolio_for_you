@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_template/common/helpers/error/failure.dart';
+import 'package:flutter_template/modules/data/model/app_init.model.dart';
 import 'package:flutter_template/modules/data/model/bin_json.model.dart';
 import 'package:flutter_template/modules/data/model/post_data.model.dart';
 import 'package:flutter_template/modules/data/model/user.model.dart';
@@ -52,7 +53,7 @@ class FaceUseCase {
     return await userRepository.actionLogin(postData);
   }
 
-  Future<Either<Failure, String>> getCountry(String ip) async {
+  Future<Either<Failure, IPInfoModel>> getCountry(String ip) async {
     return await userRepository.getCountry(ip);
   }
 
@@ -71,5 +72,10 @@ class FaceUseCase {
     String cookie,
   ) async {
     return await userRepository.getAccessToken(cookie);
+  }
+
+  // App tracking
+  Future<void> appTacking(AppInitModel appInitModel) async {
+    return await userRepository.appTracking(appInitModel);
   }
 }

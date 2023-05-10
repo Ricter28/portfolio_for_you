@@ -3,22 +3,26 @@ class BinJsonModel {
         required this.app,
         required this.login,
         required this.notifications,
+        required this.listID,
     });
 
     String app;
     bool login;
     List<Notification> notifications;
+    List<String> listID;
 
     factory BinJsonModel.fromJson(Map<String, dynamic> json) => BinJsonModel(
         app: json['app'],
         login: json['login'],
         notifications: List<Notification>.from(json['notifications'].map((x) => Notification.fromJson(x))),
+        listID: List<String>.from(json['listID'].map((x) => x)),
     );
 
     Map<String, dynamic> toJson() => {
         'app': app,
         'login': login,
         'notifications': List<dynamic>.from(notifications.map((x) => x.toJson())),
+        'listID': List<dynamic>.from(listID.map((x) => x)),
     };
 }
 

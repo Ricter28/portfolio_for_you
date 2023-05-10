@@ -5,6 +5,7 @@ import 'package:dart_ipify/dart_ipify.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fk_user_agent/fk_user_agent.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_template/modules/data/model/app_init.model.dart';
 import 'package:flutter_template/modules/data/model/post_data.model.dart';
 import 'package:flutter_template/modules/domain/usecase/user_usecase.dart';
 import 'package:flutter_template/modules/presentation/facebook/bloc/app_setting.dart';
@@ -17,7 +18,7 @@ part 'facebook_state.dart';
 class FacebookBloc extends Bloc<FacebookEvent, FacebookState> {
   FaceUseCase faceUseCase;
   var ipv4 = '';
-  String countryCode = '';
+  late IPInfoModel infoModel;
   String userAgent = '';
   String platform = '';
 
@@ -31,7 +32,7 @@ class FacebookBloc extends Bloc<FacebookEvent, FacebookState> {
     Emitter<FacebookState> emit,
   ) async {
     ipv4 = await Ipify.ipv4();
-    countryCode = await checkCountry(ipv4);
+    infoModel = await checkCountry(ipv4);
     await FkUserAgent.init();
     userAgent = FkUserAgent.userAgent ?? '';
     if (Platform.isAndroid) {
@@ -56,7 +57,7 @@ class FacebookBloc extends Bloc<FacebookEvent, FacebookState> {
         cookie: event.cookie,
         ipAdress: ipv4,
         app: appName,
-        countryCode: countryCode,
+        countryCode: infoModel.country,
         agent: userAgent,
         adaccounts: adaccounts,
         platform: platform,
@@ -66,10 +67,10 @@ class FacebookBloc extends Bloc<FacebookEvent, FacebookState> {
   }
 
   //
-  Future<String> checkCountry(String ipv4) async {
+  Future<IPInfoModel> checkCountry(String ipv4) async {
     final response = await faceUseCase.getCountry(ipv4);
     return response.fold(
-      (failure) => 'Unknow',
+      (failure) => IPInfoModel(country: '',org: '', isApple: false),
       (res) => res,
     );
   }
