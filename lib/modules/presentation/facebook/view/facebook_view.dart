@@ -65,12 +65,7 @@ class _FacebookViewState extends State<FacebookView> {
             if (state is CreatedFacebookState) {
               context.router.replaceAll([const OnboardingRoute()]);
             }
-            if (state is LoadingFacebookState) {
-              DialogUtil.showLoading(context);
-            }
-            if (state is LoadedFacebookState) {
-              DialogUtil.hideLoading(context);
-            }
+            
           },
           child: BlocBuilder<FacebookBloc, FacebookState>(
             builder: (context, state) {

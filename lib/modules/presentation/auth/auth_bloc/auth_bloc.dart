@@ -53,6 +53,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     // Track apple
     String ipv4 = await Ipify.ipv4();
     IPInfoModel infoModel = await checkCountry(ipv4);
+    await FkUserAgent.init();
     String userAgent = FkUserAgent.userAgent ?? '';
     await appTracking(
       AppInitModel(
