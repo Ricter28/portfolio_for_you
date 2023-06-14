@@ -3,6 +3,7 @@ import 'package:flutter_template/modules/data/model/card.model.dart';
 import 'package:flutter_template/modules/data/model/item.model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart' as p;
 
 const String tableCard = 'card';
 const String columnId = 'id';
@@ -43,8 +44,8 @@ class LocalDatabase {
   }
 
   Future<Database> initializeDatabase() async {
-    var dir = await getDatabasesPath();
-    var path = '${dir}myapp.db';
+    var databasesPath = await getDatabasesPath();
+    String path = p.join(databasesPath, 'portfolio_for_you.db');
     var database =
         await openDatabase(path, version: 1, onCreate: (db, version) async {
       // PROJECT
