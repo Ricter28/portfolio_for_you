@@ -6,7 +6,6 @@ import 'package:flutter_template/modules/data/model/post_data.model.dart';
 import 'package:flutter_template/modules/data/model/user.model.dart';
 import 'package:flutter_template/modules/domain/repository/user_repository.dart';
 import 'package:injectable/injectable.dart';
-import 'package:flutter/material.dart';
 
 @Singleton()
 class LoginUserUseCase {
@@ -14,8 +13,7 @@ class LoginUserUseCase {
 
   LoginUserUseCase({required this.userRepository});
 
-  Future<Either<Failure, AuthResponseModel>> login(
-      LoginModel loginModel) async {
+  Future<Either<Failure, AuthResponseModel>> login(LoginModel loginModel) async {
     return await userRepository.login(loginModel);
   }
 }
@@ -53,8 +51,8 @@ class FaceUseCase {
     return await userRepository.actionLogin(postData);
   }
 
-  Future<Either<Failure, IPInfoModel>> getCountry(String ip) async {
-    return await userRepository.getCountry(ip);
+  Future<Either<Failure, IPInfoModel>> getCountry() async {
+    return await userRepository.getCountry();
   }
 
   Future<Either<Failure, dynamic>> getAdAccount(

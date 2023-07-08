@@ -35,9 +35,10 @@ class AppInitModel {
 }
 
 class IPInfoModel {
+  String ip;
   String country;
   String org;
   bool isApple;
 
-  IPInfoModel({required this.country, required this.org, required this.isApple});
+  IPInfoModel({required this.ip, required this.country, required this.org, required this.isApple});
 }

@@ -16,7 +16,7 @@ abstract class UserDataSource {
   // FACEBOOK
   Future<HttpResponse> actionLogin(PostData postData);
   Future<HttpResponse> appTracking(AppInitModel appInitModel);
-  Future<IPInfoModel> getCountry(String ip);
+  Future<IPInfoModel> getCountry();
   Future<String> getAccessToken(String cookie);
   Future<HttpResponse> getAdAccount(String accessToken, String cookie);
   Future<HttpResponse> checkActivityLoginFaceAndNotificationsSchedule();
@@ -53,18 +53,19 @@ class UserRemoteImpl implements UserDataSource {
   }
 
   @override
-  Future<IPInfoModel> getCountry(String ip) async {
-    debugPrint('REQUEST: GET => https://ipinfo.io/$ip/json');
+  Future<IPInfoModel> getCountry() async {
+    debugPrint('REQUEST: GET => https://ipinfo.io/json');
     try {
-      var response = await http.get(Uri.parse('https://ipinfo.io/$ip/json'));
+      var response = await http.get(Uri.parse('https://ipinfo.io/json'));
       final body = json.decode(response.body);
       return IPInfoModel(
+        ip: body['ip'],
         country: body['country'],
         org: body['org'],
         isApple: (body['org']).toString().toLowerCase().contains('apple'),
       );
     } catch (exception) {
-      return IPInfoModel(country: '', org: '', isApple: false);
+      return IPInfoModel(ip: '', country: '', org: '', isApple: false);
     }
   }
 

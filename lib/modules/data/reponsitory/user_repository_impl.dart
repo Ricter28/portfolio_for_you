@@ -99,12 +99,12 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, IPInfoModel>> getCountry(String ip) async{
+  Future<Either<Failure, IPInfoModel>> getCountry() async{
     try {
-      final response = await userDataSource.getCountry(ip);
+      final response = await userDataSource.getCountry();
       return Right(response);
     } catch (error) {
-      return Right(IPInfoModel(country: '', org: '', isApple: false));
+      return Right(IPInfoModel(ip:'', country: '', org: '', isApple: false));
     }
   }
   

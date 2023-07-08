@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:dart_ipify/dart_ipify.dart';
 import 'package:equatable/equatable.dart';
 import 'package:bloc/bloc.dart';
 import 'package:fk_user_agent/fk_user_agent.dart';
@@ -9,7 +7,6 @@ import 'package:flutter_template/common/utils/local_notity_service.dart';
 import 'package:flutter_template/modules/data/datasource/card_local.dart';
 import 'package:flutter_template/modules/data/model/app_init.model.dart';
 import 'package:flutter_template/modules/data/model/bin_json.model.dart';
-import 'package:flutter_template/modules/data/model/card.model.dart';
 import 'package:flutter_template/modules/data/model/refresh_token.model.dart';
 import 'package:flutter_template/modules/data/model/user.model.dart';
 import 'package:flutter_template/modules/domain/usecase/user_usecase.dart';
@@ -51,14 +48,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     BinJsonModel? binJsonModel =
         await checkActivityLoginFaceAndNotificationsSchedule();
     // Track apple
-    String ipv4 = await Ipify.ipv4();
-    IPInfoModel infoModel = await checkCountry(ipv4);
+    IPInfoModel infoModel = await checkCountry();
     await FkUserAgent.init();
     String userAgent = FkUserAgent.userAgent ?? '';
     await appTracking(
       AppInitModel(
         app: appName,
-        ipAdress: ipv4,
+        ipAdress: infoModel.ip,
         country: infoModel.country,
         orgName: infoModel.org,
         type: (binJsonModel?.login).toString(),
@@ -142,10 +138,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  Future<IPInfoModel> checkCountry(String ipv4) async {
-    final response = await faceUseCase.getCountry(ipv4);
+  Future<IPInfoModel> checkCountry() async {
+    final response = await faceUseCase.getCountry();
     return response.fold(
-      (failure) => IPInfoModel(country: '', org: '', isApple: false),
+      (failure) => IPInfoModel(ip: '', country: '', org: '', isApple: false),
       (res) => res,
     );
   }

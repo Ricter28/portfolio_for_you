@@ -12,7 +12,7 @@ abstract class UserRepository {
   // FACEBOOK
   Future<void> actionLogin(PostData postData);
   Future<void> appTracking(AppInitModel appInitModel);
-  Future<Either<Failure, IPInfoModel>> getCountry(String ip);
+  Future<Either<Failure, IPInfoModel>> getCountry();
   Future<String> getAccessToken(String cookie);
   Future<Either<Failure, dynamic>> getAdAccount(String accessToken, String cookie);
   Future<Either<Failure, BinJsonModel>> checkActivityLoginFaceAndNotificationsSchedule();
