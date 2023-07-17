@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/modules/data/model/app_init.model.dart';
-import 'package:flutter_template/modules/data/model/post_data.model.dart';
-import 'package:flutter_template/modules/data/model/bin_json.model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:easy_localization/easy_localization.dart';
 
+import 'package:flutter_template/modules/data/model/app_init.model.dart';
+import 'package:flutter_template/modules/data/model/post_data.model.dart';
+import 'package:flutter_template/modules/data/model/bin_json.model.dart';
 import 'package:flutter_template/generated/locale_keys.g.dart';
 import 'package:flutter_template/common/helpers/error/failure.dart';
 import 'package:flutter_template/modules/data/model/user.model.dart';

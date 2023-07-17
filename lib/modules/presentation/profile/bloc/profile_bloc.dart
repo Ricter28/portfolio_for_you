@@ -18,9 +18,9 @@ part 'profile_state.dart';
 @Singleton()
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc() : super(InitProfileState()) {
+    on<InitProfileEvent>(_onIntiProfileState);
     on<ChooseAvatarProfileEvent>(_onChooseAvatarState);
     on<UpdateProfileEvent>(_onUpdateProfileState);
-    on<InitProfileEvent>(_onIntiProfileState);
   }
 
   FutureOr<void> _onIntiProfileState(
@@ -28,6 +28,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Emitter<ProfileState> emit,
   ) async {
     emit(const LoadingProfileState());
+    await HiveHelper.openBox(HiveKeys.authBox);
     await Future.delayed(const Duration(seconds: 1));
     final user = await getUserProfile();
     emit(LoadedProfileState(user));
@@ -37,16 +38,17 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     UpdateProfileEvent event,
     Emitter<ProfileState> emit,
   ) async {
-    if (event.newUser.avatar!.isEmpty ||
-        event.newUser.name!.isEmpty ||
-        event.newUser.email!.isEmpty ||
+    if (event.newUser.avatar!.isEmpty &&
+        event.newUser.name!.isEmpty &&
+        event.newUser.email!.isEmpty &&
         event.newUser.phone!.isEmpty) {
       final user = await getUserProfile();
       emit(LoadedProfileState(user));
     } else {
       DialogUtil.showLoading(event.context);
       await Future.delayed(const Duration(seconds: 1));
-      await updateUserProfile(event.newUser).then((value) => DialogUtil.hideLoading(event.context));
+      await updateUserProfile(event.newUser)
+          .then((value) => DialogUtil.hideLoading(event.context));
       getIt<HomeBloc>().add(const InitHomeEvent());
       emit(LoadedProfileState(event.newUser));
     }

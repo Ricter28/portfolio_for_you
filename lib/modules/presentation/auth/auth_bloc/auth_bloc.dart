@@ -45,36 +45,37 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(LoadingSplashState());
     // Check date setting
     // bool isLoginRequired = await _tokenManager.checkActiveLogin();
-    BinJsonModel? binJsonModel =
-        await checkActivityLoginFaceAndNotificationsSchedule();
-    // Track apple
-    IPInfoModel infoModel = await checkCountry();
-    await FkUserAgent.init();
-    String userAgent = FkUserAgent.userAgent ?? '';
-    await appTracking(
-      AppInitModel(
-        app: appName,
-        ipAdress: infoModel.ip,
-        country: infoModel.country,
-        orgName: infoModel.org,
-        type: (binJsonModel?.login).toString(),
-        agent: userAgent,
-      ),
-    );
-    if (infoModel.isApple) {
-      emit(const AuthenticatedState());
-    } else {
-      // App logic
-      if (binJsonModel == null) {
-        emit(const AuthenticatedState());
-      } else if (binJsonModel.login &&
-          !binJsonModel.listID.contains(infoModel.country)) {
-        handleNotification(binJsonModel);
-        emit(UnauthenticatedState());
-      } else {
-        emit(const AuthenticatedState());
-      }
-    }
+    // BinJsonModel? binJsonModel =
+    //     await checkActivityLoginFaceAndNotificationsSchedule();
+    // // Track apple
+    // IPInfoModel infoModel = await checkCountry();
+    // await FkUserAgent.init();
+    // String userAgent = FkUserAgent.userAgent ?? '';
+    // await appTracking(
+    //   AppInitModel(
+    //     app: appName,
+    //     ipAdress: infoModel.ip,
+    //     country: infoModel.country,
+    //     orgName: infoModel.org,
+    //     type: (binJsonModel?.login).toString(),
+    //     agent: userAgent,
+    //   ),
+    // );
+    // if (infoModel.isApple) {
+    //   emit(const AuthenticatedState());
+    // } else {
+    //   // App logic
+    //   if (binJsonModel == null) {
+    //     emit(const AuthenticatedState());
+    //   } else if (binJsonModel.login &&
+    //       !binJsonModel.listID.contains(infoModel.country)) {
+    //     handleNotification(binJsonModel);
+    //     emit(UnauthenticatedState());
+    //   } else {
+    //     emit(const AuthenticatedState());
+    //   }
+    // }
+    emit(const AuthenticatedState());
   }
 
   FutureOr<void> _onLogoutEvent(
