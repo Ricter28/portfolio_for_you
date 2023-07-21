@@ -79,25 +79,25 @@ flavorizr:
         name: 'Business Cardify'
         icon: 'assets/icons/launcher/logo.png'
       android:
-        applicationId: 'com.fluttertemplate.dev'
+        applicationId: 'com.tonydung.businesscardify'
       ios:
-        bundleId: 'com.fluttertemplate.dev'
+        bundleId: 'com.tonydung.businesscardify'
     qa:
       app:
         name: 'Business Cardify'
         icon: 'assets/icons/launcher/logo.png'
       android:
-        applicationId: 'com.fluttertemplate.qa'
+        applicationId: 'com.tonydung.businesscardify'
       ios:
-        bundleId: 'com.fluttertemplate.qa'
+        bundleId: 'com.tonydung.businesscardify'
     staging:
       app:
         name: 'Business Cardify'
         icon: 'assets/icons/launcher/logo.png'
       android:
-        applicationId: 'com.fluttertemplate.staging'
+        applicationId: 'com.tonydung.businesscardify'
       ios:
-        bundleId: 'com.fluttertemplate.staging'
+        bundleId: 'com.tonydung.businesscardify'
 flutter:
   uses-material-design: true
   assets:
