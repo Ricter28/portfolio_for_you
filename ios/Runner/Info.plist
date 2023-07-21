@@ -33,14 +33,6 @@
     <true/>
     <key>NSCameraUsageDescription</key>
     <string>App requires access to device camera to capture photos for profile.</string>
-    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>App requires access to your device location to set your address.</string>
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string>This app requires your location so that we can show you where you are.</string>
-    <key>NSLocationUsageDescription</key>
-    <string>App requires access to your device location to set your address.</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>App requires access to your device location to set your address.</string>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>App requires access to device library to use photos for profile.</string>
     <key>UIApplicationSupportsIndirectInputEvents</key>
