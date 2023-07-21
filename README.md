@@ -111,6 +111,6 @@ $ fvm flutter build ipa --release --flavor qa -t lib/main_qa.dart
 ## Rename app
 Run this command inside your flutter project root.
 ```bash
-$ flutter pub global run rename --bundleId com.onatcipli.networkUpp
-$ flutter pub global run rename --appname "Network Upp"
+$ flutter pub global run rename --bundleId com.tonydung.businesscardify
+$ flutter pub global run rename --appname "Business Cardify"
 ```
