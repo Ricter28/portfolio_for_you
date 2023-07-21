@@ -114,3 +114,12 @@ Run this command inside your flutter project root.
 $ flutter pub global run rename --bundleId com.tonydung.businesscardify
 $ flutter pub global run rename --appname "Business Cardify"
 ```
+
+Description:
+Your business card will always be ready to share in any situation, helping to create more business opportunities and professional exchanges. Impress potential partners and customers with Business Cardify - the application that enhances your business expertise and efficiency.
+1 Choose from a wide range of available card templates
+2 Add your contact information, company logo, and social media for a professional and impressive look.
+3 Friendly interface and easy to use
+
+https://www.termsfeed.com/live/35457147-97b4-4f25-ae0c-82dc2cf9148e
+https://sites.google.com/view/business-cardify/trang-ch%E1%BB%A7
