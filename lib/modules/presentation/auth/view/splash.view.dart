@@ -10,7 +10,7 @@ class SplashView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Assets.icons.launcher.icFlutterLogo.svg(
+        child: Assets.icons.launcher.logo.image(
           width: MediaQuery.of(context).size.width / 2,
           height: MediaQuery.of(context).size.width / 2,
         ),

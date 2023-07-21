@@ -308,9 +308,6 @@ class $AssetsIconsGen {
 
   $AssetsIconsLauncherGen get launcher => const $AssetsIconsLauncherGen();
 
-  /// File path: assets/icons/logo.png
-  AssetGenImage get logo => const AssetGenImage('assets/icons/logo.png');
-
   /// List of all assets
   List<dynamic> get values => [
         f,
@@ -345,8 +342,7 @@ class $AssetsIconsGen {
         icSendMessage,
         icTick,
         icUnMute,
-        icUser,
-        logo
+        icUser
       ];
 }
 
@@ -414,16 +410,12 @@ class $AssetsLocalesGen {
 class $AssetsIconsLauncherGen {
   const $AssetsIconsLauncherGen();
 
-  /// File path: assets/icons/launcher/app_icon.png
-  AssetGenImage get appIcon =>
-      const AssetGenImage('assets/icons/launcher/app_icon.png');
-
-  /// File path: assets/icons/launcher/ic_flutter_logo.svg
-  SvgGenImage get icFlutterLogo =>
-      const SvgGenImage('assets/icons/launcher/ic_flutter_logo.svg');
+  /// File path: assets/icons/launcher/logo.png
+  AssetGenImage get logo =>
+      const AssetGenImage('assets/icons/launcher/logo.png');
 
   /// List of all assets
-  List<dynamic> get values => [appIcon, icFlutterLogo];
+  List<AssetGenImage> get values => [logo];
 }
 
 class Assets {

@@ -76,7 +76,7 @@ flavorizr:
   flavors:
     dev:
       app:
-        name: '[DEV] Card'
+        name: 'Business Cardify'
         icon: 'assets/icons/launcher/app_icon.png'
       android:
         applicationId: 'com.fluttertemplate.dev'
@@ -84,7 +84,7 @@ flavorizr:
         bundleId: 'com.fluttertemplate.dev'
     qa:
       app:
-        name: '[QA] Card '
+        name: 'Business Cardify'
         icon: 'assets/icons/launcher/app_icon.png'
       android:
         applicationId: 'com.fluttertemplate.qa'
@@ -92,7 +92,7 @@ flavorizr:
         bundleId: 'com.fluttertemplate.qa'
     staging:
       app:
-        name: 'Card'
+        name: 'Business Cardify'
         icon: 'assets/icons/launcher/app_icon.png'
       android:
         applicationId: 'com.fluttertemplate.staging'
