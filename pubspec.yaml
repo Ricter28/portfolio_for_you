@@ -77,7 +77,7 @@ flavorizr:
     dev:
       app:
         name: 'Business Cardify'
-        icon: 'assets/icons/launcher/app_icon.png'
+        icon: 'assets/icons/launcher/logo.png'
       android:
         applicationId: 'com.fluttertemplate.dev'
       ios:
@@ -85,7 +85,7 @@ flavorizr:
     qa:
       app:
         name: 'Business Cardify'
-        icon: 'assets/icons/launcher/app_icon.png'
+        icon: 'assets/icons/launcher/logo.png'
       android:
         applicationId: 'com.fluttertemplate.qa'
       ios:
@@ -93,7 +93,7 @@ flavorizr:
     staging:
       app:
         name: 'Business Cardify'
-        icon: 'assets/icons/launcher/app_icon.png'
+        icon: 'assets/icons/launcher/logo.png'
       android:
         applicationId: 'com.fluttertemplate.staging'
       ios:

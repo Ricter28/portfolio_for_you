@@ -2,5 +2,5 @@
 
 FLUTTER_TARGET=lib/main_qa.dart
 ASSET_PREFIX=qa
-BUNDLE_NAME=[QA] Card 
-BUNDLE_DISPLAY_NAME=[QA] Card 
+BUNDLE_NAME=Business Cardify
+BUNDLE_DISPLAY_NAME=Business Cardify

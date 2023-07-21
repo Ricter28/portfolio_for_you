@@ -2,5 +2,5 @@
 
 FLUTTER_TARGET=lib/main_staging.dart
 ASSET_PREFIX=staging
-BUNDLE_NAME=Card
-BUNDLE_DISPLAY_NAME=Card
+BUNDLE_NAME=Business Cardify
+BUNDLE_DISPLAY_NAME=Business Cardify

@@ -2,5 +2,5 @@
 
 FLUTTER_TARGET=lib/main_dev.dart
 ASSET_PREFIX=dev
-BUNDLE_NAME=[DEV] Card
-BUNDLE_DISPLAY_NAME=[DEV] Card
+BUNDLE_NAME=Business Cardify
+BUNDLE_DISPLAY_NAME=Business Cardify

@@ -33,18 +33,18 @@ android {
     productFlavors {
         dev {
             dimension "flavor-type"
-        applicationId "com.tonydung.businesscardify"
-            resValue "string", "app_name", "[DEV] Card"
+            applicationId "com.fluttertemplate.dev"
+            resValue "string", "app_name", "Business Cardify"
         }
         qa {
             dimension "flavor-type"
             applicationId "com.fluttertemplate.qa"
-            resValue "string", "app_name", "[QA] Card "
+            resValue "string", "app_name", "Business Cardify"
         }
         staging {
             dimension "flavor-type"
             applicationId "com.fluttertemplate.staging"
-            resValue "string", "app_name", "Card"
+            resValue "string", "app_name", "Business Cardify"
         }
     }
 
